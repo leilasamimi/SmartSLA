@@ -1,0 +1,265 @@
+[%
+  // Load metamodel and model
+  "Starting EGL template execution".println();
+  var sla = smartSLA!SLAContract.allInstances().first;
+  "Processing SLAContract: ".concat(sla.name).println();
+%]
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract [%=sla.name%] {
+    
+    // Struct Definitions
+    struct Party {
+        string role;
+        address wallet;
+        uint256 reputationScore;
+    }
+    
+    struct CloudResource {
+        string resourceType;
+        string identifier;
+        string provider;
+    }
+    
+    struct ServiceObjective {
+        string metric;
+        uint256 threshold;
+        string measurementUnit;
+        CloudResource resource;
+        string evaluationMethod;
+    }
+    
+    struct Penalty {
+        string condition;
+        string action;
+        string enforcementMechanism;
+    }
+    
+    struct Incentive {
+        string condition;
+        string reward;
+    }
+    
+    struct TerminationCondition {
+        string reason;
+        string consequence;
+    }
+    
+    struct DisputeResolution {
+        string procedure;
+        string mediator;
+        string jurisdiction;
+    }
+    
+    struct ChangeRequest {
+        string description;
+        address submittedBy;
+        string status;
+        uint256 timestamp;
+    }
+    
+    struct EscalationPolicy {
+        uint256 level;
+        string action;
+        uint256 responseTime;
+    }
+    
+    struct Notification {
+        string triggerCondition;
+        string message;
+        address target;
+    }
+    
+    struct ComplianceRequirement {
+        string standard;
+        string verificationMethod;
+    }
+    
+    struct SecurityRequirement {
+        string encryptionLevel;
+        string accessControl;
+        bool auditTrail;
+    }
+    
+    struct SLAHistory {
+        uint256 timestamp;
+        string eventType;
+        string details;
+    }
+    
+    struct VersionControl {
+        string versionNumber;
+        string changeLog;
+        uint256 timestamp;
+    }
+    
+    struct SLAContractStruct {
+        string name;
+        uint256 duration;
+        string version;
+        Party[] parties;
+        ServiceObjective[] objectives;
+        Penalty[] penalties;
+        Incentive[] incentives;
+        TerminationCondition[] terminationConditions;
+        DisputeResolution disputeResolution;
+        ChangeRequest[] changeRequests;
+        EscalationPolicy escalationPolicy;
+        Notification[] notifications;
+        ComplianceRequirement[] complianceRequirements;
+        SecurityRequirement[] securityRequirements;
+        SLAHistory[] auditLogs;
+        VersionControl versionControl;
+    }
+    
+    SLAContractStruct public sla;
+    
+    constructor() {
+        // Initialize Parties
+[%
+  for (party in sla.parties) {
+    var role : String = party.role.toString();
+    if (role = "null") { role = "Provider"; }
+    "Adding Party: ".concat(party.name).println();
+%]        
+        Party memory party_[%=party.name%] = Party("[%=role%]", 0x[%=party.address%], [%=party.reputationScore%]);
+        sla.parties.push(party_[%=party.name%]);
+[%
+  }
+%]
+        
+        // Initialize Cloud Resources and Service Objectives
+[%
+  for (obj in sla.objectives) {
+    "Adding ServiceObjective: ".concat(obj.metric).println();
+%]        
+        CloudResource memory resource_[%=obj.metric%] = CloudResource("[%=obj.cloudsource.type%]", "[%=obj.cloudsource.identifier%]", "[%=obj.cloudsource.provider%]");
+        ServiceObjective memory objective_[%=obj.metric%] = ServiceObjective("[%=obj.metric%]", [%=obj.threshold%], "[%=obj.measurementUnit%]", resource_[%=obj.metric%], "[%=obj.evaluationMethod%]");
+        sla.objectives.push(objective_[%=obj.metric%]);
+[%
+  }
+%]
+        
+        // Initialize Penalties
+[%
+  for (pen in sla.penalties) {
+    "Adding Penalty: ".concat(pen.condition).println();
+%]        
+        Penalty memory penalty_[%=pen.condition.replaceAll(" ", "_")%] = Penalty("[%=pen.condition%]", "[%=pen.action%]", "[%=pen.enforcementMechanism%]");
+        sla.penalties.push(penalty_[%=pen.condition.replaceAll(" ", "_")%]);
+[%
+  }
+%]
+        
+        // Initialize Incentives
+[%
+  for (inc in sla.incentives) {
+    "Adding Incentive: ".concat(inc.condition).println();
+%]        
+        Incentive memory incentive_[%=inc.condition.replaceAll(" ", "_")%] = Incentive("[%=inc.condition%]", "[%=inc.reward%]");
+        sla.incentives.push(incentive_[%=inc.condition.replaceAll(" ", "_")%]);
+[%
+  }
+%]
+        
+        // Initialize Termination Conditions
+[%
+  for (term in sla.terminationConditions) {
+    "Adding TerminationCondition: ".concat(term.reason).println();
+%]        
+        TerminationCondition memory termination_[%=term.reason.replaceAll(" ", "_")%] = TerminationCondition("[%=term.reason%]", "[%=term.consequence%]");
+        sla.terminationConditions.push(termination_[%=term.reason.replaceAll(" ", "_")%]);
+[%
+  }
+%]
+        
+        // Initialize Dispute Resolution
+        sla.disputeResolution = DisputeResolution("[%=sla.disputeresolution.procedure%]", "[%=sla.disputeresolution.mediator%]", "[%=sla.disputeresolution.jurisdiction%]");
+        
+        // Initialize Change Requests
+[%
+  for (cr in sla.changerequest) {
+    "Adding ChangeRequest: ".concat(cr.description).println();
+%]        
+        ChangeRequest memory changeRequest_[%=cr.description.replaceAll(" ", "_")%] = ChangeRequest("[%=cr.description%]", 0x[%=cr.party.address%], "[%=cr.status%]", block.timestamp);
+        sla.changeRequests.push(changeRequest_[%=cr.description.replaceAll(" ", "_")%]);
+[%
+  }
+%]
+        
+        // Initialize Escalation Policy
+        sla.escalationPolicy = EscalationPolicy([%=sla.escalationpolicy.level%], "[%=sla.escalationpolicy.action%]", [%=sla.escalationpolicy.responseTime%]);
+        
+        // Initialize Notifications
+[%
+  for (notif in sla.notifications) {
+    "Adding Notification: ".concat(notif.triggerCondition).println();
+%]        
+        Notification memory notification_[%=notif.triggerCondition.replaceAll(" ", "_")%] = Notification("[%=notif.triggerCondition%]", "[%=notif.message%]", 0x[%=notif.target.address%]);
+        sla.notifications.push(notification_[%=notif.triggerCondition.replaceAll(" ", "_")%]);
+[%
+  }
+%]
+        
+        // Initialize Compliance Requirements
+[%
+  for (comp in sla.compliancerequirements) {
+    "Adding ComplianceRequirement: ".concat(comp.standard).println();
+%]        
+        ComplianceRequirement memory compliance_[%=comp.standard%] = ComplianceRequirement("[%=comp.standard%]", "[%=comp.verificationMethod%]");
+        sla.complianceRequirements.push(compliance_[%=comp.standard%]);
+[%
+  }
+%]
+        
+        // Initialize Security Requirements
+[%
+  for (sec in sla.securityrequirements) {
+    "Adding SecurityRequirement: ".concat(sec.encryptionLevel).println();
+%]        
+        SecurityRequirement memory security_[%=sec.encryptionLevel%] = SecurityRequirement("[%=sec.encryptionLevel%]", "[%=sec.accessControl%]", [%=sec.auditTrail%]);
+        sla.securityRequirements.push(security_[%=sec.encryptionLevel%]);
+[%
+  }
+%]
+        
+        // Initialize SLA History
+[%
+  if (sla.auditLogs.isDefined() and not sla.auditLogs.isEmpty()) {
+    var index : Integer = 0;
+    for (hist in sla.auditLogs) {
+      if (hist.eventType.isDefined() and hist.details.isDefined()) {
+        var eventTypeStr : String = hist.eventType.getLiteral();
+        if (eventTypeStr.isUndefined()) {
+          eventTypeStr = hist.eventType.toString();
+          if (eventTypeStr.isUndefined()) {
+            eventTypeStr = "UnknownEventType";
+          }
+          "WARNING: eventType literal undefined, using: ".concat(eventTypeStr).println();
+        }
+        "Adding SLAHistory: ".concat(eventTypeStr).println();
+%]        
+        SLAHistory memory history_[%=index%] = SLAHistory(block.timestamp, "[%=eventTypeStr%]", "[%=hist.details%]");
+        sla.auditLogs.push(history_[%=index%]);
+[%
+        index = index + 1;
+      } else {
+        "Skipping invalid SLAHistory entry: eventType or details undefined".println();
+      }
+    }
+  } else {
+    "No SLAHistory entries found or auditLogs undefined".println();
+  }
+%]
+        
+        // Initialize Version Control
+        sla.versionControl = VersionControl("[%=sla.versioncontrol.versionNumber%]", "[%=sla.versioncontrol.changeLog%]", block.timestamp);
+        
+        // SLA General Properties
+        sla.name = "[%=sla.name%]";
+        sla.duration = [%=sla.duration%];
+        sla.version = "[%=sla.version%]";
+    }
+}
