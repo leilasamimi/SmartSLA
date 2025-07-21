@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smartSLA:SLAContract
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:smartSLA="http://www.example.org/smartSLA"
+    xsi:schemaLocation="http://www.example.org/smartSLA smartSLA.ecore"
+    name="CloudNetworkSLA_v1.1"
+    duration="180"
+    version="1.1">
+  <parties name="Provider"
+      address="0x9876543210abcdef9876543210abcdef98765432"
+      reputationScore="90.0"
+      changerequest="//@changerequest.0"/>
+  <parties name="Consumer"
+      role="Consumer"
+      address="0xfedcba0987654321fedcba0987654321fedcba09"
+      reputationScore="88.0"/>
+  <objectives
+      metric="Latency"
+      threshold="50.0"
+      measurementUnit="ms"
+      evaluationMethod="Real-time monitoring">
+    <cloudsource
+        type="Network"
+        identifier="VPC-789"
+        provider="Azure"/>
+  </objectives>
+  <penalties
+      condition="Latency > 50ms"
+      action="Refund 5 tokens per ms delay"
+      enforcementMechanism="Automatic deduction"/>
+  <notifications
+      triggerCondition="Latency spike"
+      message="Latency spike detected in network service"
+      target="//@parties.1"/>
+  <compliancerequirements
+      standard="ISO9001"
+      verificationMethod="Monthly report"/>
+  <securityrequirements
+      encryptionLevel="TLS1.2"
+      accessControl="IP Whitelisting"
+      auditTrail="true"/>
+  <auditLogs
+      details="Latency exceeded threshold on day 50"/>
+  <versioncontrol
+      versionNumber="1.1"
+      changeLog="Minor updates in latency monitoring"/>
+  <incentives
+      condition="Latency under threshold for 90 days"
+      reward="3 extra tokens reward"/>
+  <terminationConditions
+      reason="Continuous network underperformance"
+      consequence="Contract termination with penalty"/>
+  <disputeresolution
+      procedure="Direct negotiation then arbitration"
+      mediator="Network Arbitration Board"
+      jurisdiction="Regional jurisdiction"/>
+  <changerequest
+      description="Optimize network routing"
+      status="Pending"
+      party="//@parties.0"/>
+  <escalationpolicy
+      level="1"
+      action="Immediate investigation and resolution"
+      responseTime="15"/>
+</smartSLA:SLAContract>

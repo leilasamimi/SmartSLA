@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smartSLA:SLAContract
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:smartSLA="http://www.example.org/smartSLA"
+    xsi:schemaLocation="http://www.example.org/smartSLA smartSLA.ecore"
+    name="CloudDatabaseSLA_v1.0"
+    duration="365"
+    version="1.0">
+  <parties name="Provider"
+      address="0xABCDEFabcdefABCDEFabcdefABCDEFabcdefABCDEF"
+      reputationScore="98.0"
+      changerequest="//@changerequest.0"/>
+  <parties name="Consumer"
+      role="Consumer"
+      address="0x1234561234561234561234561234561234561234"
+      reputationScore="85.0"/>
+  <objectives
+      metric="ResponseTime"
+      threshold="100.0"
+      measurementUnit="ms"
+      evaluationMethod="Real-time monitoring">
+    <cloudsource
+        type="Database"
+        identifier="DB-Instance-001"
+        provider="AWS RDS"/>
+  </objectives>
+  <objectives
+      metric="TransactionsPerSecond"
+      threshold="2000.0"
+      measurementUnit="TPS"
+      evaluationMethod="Performance benchmark">
+    <cloudsource
+        type="Database"
+        identifier="DB-Instance-001"
+        provider="AWS RDS"/>
+  </objectives>
+  <objectives
+      metric="RecoveryTime"
+      threshold="300.0"
+      measurementUnit="seconds"
+      evaluationMethod="Incident reports">
+    <cloudsource
+        type="Database"
+        identifier="DB-Instance-001"
+        provider="AWS RDS"/>
+  </objectives>
+  <penalties
+      condition="ResponseTime > 100ms or TPS &lt; 2000 or RecoveryTime > 300s"
+      action="Refund 15 tokens"
+      enforcementMechanism="Automatic deduction"/>
+  <notifications
+      triggerCondition="SLA violation"
+      message="Database SLA violation detected"
+      target="//@parties.1"/>
+  <compliancerequirements
+      standard="ISO27001"
+      verificationMethod="Annual audit"/>
+  <securityrequirements
+      encryptionLevel="AES-256"
+      accessControl="Multi-factor authentication"
+      auditTrail="true"/>
+  <auditLogs
+      eventType="Performance Alert"
+      details="ResponseTime exceeded threshold"/>
+  <versioncontrol
+      versionNumber="1.0"
+      changeLog="Initial deployment"/>
+  <incentives
+      condition="SLA compliance for 180 days"
+      reward="Bonus 10 tokens discount"/>
+  <terminationConditions
+      reason="Severe or repeated SLA violations"
+      consequence="Contract termination with penalty"/>
+  <disputeresolution
+      procedure="Mediation then arbitration"
+      mediator="Database Arbitration Center"
+      jurisdiction="Local jurisdiction"/>
+  <changerequest
+      description="Upgrade database instance type"
+      status="Pending"
+      party="//@parties.0"/>
+  <escalationpolicy
+      level="2"
+      action="Immediate remedial action"
+      responseTime="45"/>
+</smartSLA:SLAContract>

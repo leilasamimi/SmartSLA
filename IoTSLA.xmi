@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smartSLA:SLAContract
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:smartSLA="http://www.example.org/smartSLA"
+    xsi:schemaLocation="http://www.example.org/smartSLA smartSLA.ecore"
+    name="IoTSLA_v1.0"
+    duration="365"
+    version="1.0">
+  <parties name="Provider"
+      address="0xIoTProviderAddress"
+      reputationScore="95.0"
+      changerequest="//@changerequest.0"/>
+  <parties name="Consumer"
+      role="Consumer"
+      address="0xIoTConsumerAddress"
+      reputationScore="90.0"/>
+  <objectives
+      metric="SensorResponseTime"
+      threshold="200.0"
+      measurementUnit="ms"
+      evaluationMethod="Real-time sensor data analysis">
+    <cloudsource
+        type="IoTDevice"
+        identifier="Sensor-XYZ"
+        provider="Generic IoT Provider"/>
+  </objectives>
+  <objectives
+      metric="ConnectionUptime"
+      threshold="99.5"
+      measurementUnit="percentage"
+      evaluationMethod="Connectivity logs review">
+    <cloudsource
+        type="Network"
+        identifier="Network-001"
+        provider="IoT Connectivity Inc."/>
+  </objectives>
+  <objectives
+      metric="DataAccuracy"
+      threshold="98.0"
+      measurementUnit="percentage"
+      evaluationMethod="Data quality checks">
+    <cloudsource
+        type="IoTDataPlatform"
+        identifier="DataPlatform-101"
+        provider="IoT Data Analytics Co."/>
+  </objectives>
+  <penalties
+      condition="Any objective falls below threshold"
+      action="Refund 10 tokens"
+      enforcementMechanism="Automatic deduction from provider wallet"/>
+  <notifications
+      triggerCondition="SLA violation in sensor response or connectivity"
+      message="IoT SLA violation detected"
+      target="//@parties.1"/>
+  <compliancerequirements
+      standard="ISO/IEC 30141"
+      verificationMethod="Annual audit"/>
+  <securityrequirements
+      encryptionLevel="AES-256"
+      accessControl="Multi-factor authentication"
+      auditTrail="true"/>
+  <auditLogs
+      eventType="DataAccuracyAlert"
+      details="Data accuracy dropped below threshold on day X"/>
+  <versioncontrol
+      versionNumber="1.0"
+      changeLog="Initial IoT SLA deployment"/>
+  <incentives
+      condition="Continuous SLA compliance for 90 days"
+      reward="5 extra tokens discount"/>
+  <terminationConditions
+      reason="Repeated or severe SLA violations"
+      consequence="Contract termination with penalty"/>
+  <disputeresolution
+      procedure="Mediation then arbitration"
+      mediator="IoT Arbitration Center"
+      jurisdiction="Local jurisdiction"/>
+  <changerequest
+      description="Upgrade sensor firmware for improved response"
+      status="Pending"
+      party="//@parties.0"/>
+  <escalationpolicy
+      level="1"
+      action="Immediate investigation and remedial action"
+      responseTime="20"/>
+</smartSLA:SLAContract>

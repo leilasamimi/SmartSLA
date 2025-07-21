@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/SmartSLA/src-gen" creationIcons="false" editDirectory="/SmartSLA.edit/src-gen"
+    editorDirectory="/SmartSLA.editor/src-gen" modelPluginID="SmartSLA" modelName="SmartSLA"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" codeFormatting="true"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>smartSLA.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="SmartSLA" disposableProviderFactory="true" ecorePackage="smartSLA.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="smartSLA.ecore#//Role">
+      <genEnumLiterals ecoreEnumLiteral="smartSLA.ecore#//Role/Provider"/>
+      <genEnumLiterals ecoreEnumLiteral="smartSLA.ecore#//Role/Consumer"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="smartSLA.ecore#//CloudSourceType">
+      <genEnumLiterals ecoreEnumLiteral="smartSLA.ecore#//CloudSourceType/VM"/>
+      <genEnumLiterals ecoreEnumLiteral="smartSLA.ecore#//CloudSourceType/Storage"/>
+      <genEnumLiterals ecoreEnumLiteral="smartSLA.ecore#//CloudSourceType/Network"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="smartSLA.ecore#//EventType">
+      <genEnumLiterals ecoreEnumLiteral="smartSLA.ecore#//EventType/Violation"/>
+      <genEnumLiterals ecoreEnumLiteral="smartSLA.ecore#//EventType/Compliance"/>
+      <genEnumLiterals ecoreEnumLiteral="smartSLA.ecore#//EventType/Update"/>
+      <genEnumLiterals ecoreEnumLiteral="smartSLA.ecore#//EventType/Breach"/>
+    </genEnums>
+    <genClasses ecoreClass="smartSLA.ecore#//SLAContract">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//SLAContract/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//SLAContract/duration"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//SLAContract/version"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartSLA.ecore#//SLAContract/parties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartSLA.ecore#//SLAContract/objectives"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartSLA.ecore#//SLAContract/penalties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartSLA.ecore#//SLAContract/notifications"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartSLA.ecore#//SLAContract/compliancerequirements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartSLA.ecore#//SLAContract/securityrequirements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartSLA.ecore#//SLAContract/auditLogs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartSLA.ecore#//SLAContract/versioncontrol"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartSLA.ecore#//SLAContract/incentives"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartSLA.ecore#//SLAContract/terminationConditions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartSLA.ecore#//SLAContract/disputeresolution"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartSLA.ecore#//SLAContract/changerequest"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartSLA.ecore#//SLAContract/escalationpolicy"/>
+    </genClasses>
+    <genClasses ecoreClass="smartSLA.ecore#//Party">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//Party/role"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//Party/address"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//Party/reputationScore"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smartSLA.ecore#//Party/changerequest"/>
+    </genClasses>
+    <genClasses ecoreClass="smartSLA.ecore#//ServiceObjective">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//ServiceObjective/metric"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//ServiceObjective/threshold"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//ServiceObjective/measurementUnit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//ServiceObjective/evaluationMethod"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference smartSLA.ecore#//ServiceObjective/cloudsource"/>
+    </genClasses>
+    <genClasses ecoreClass="smartSLA.ecore#//Penalty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//Penalty/condition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//Penalty/action"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//Penalty/enforcementMechanism"/>
+    </genClasses>
+    <genClasses ecoreClass="smartSLA.ecore#//Incentive">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//Incentive/condition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//Incentive/reward"/>
+    </genClasses>
+    <genClasses ecoreClass="smartSLA.ecore#//TerminationCondition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//TerminationCondition/reason"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//TerminationCondition/consequence"/>
+    </genClasses>
+    <genClasses ecoreClass="smartSLA.ecore#//DisputeResolution">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//DisputeResolution/procedure"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//DisputeResolution/mediator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//DisputeResolution/jurisdiction"/>
+    </genClasses>
+    <genClasses ecoreClass="smartSLA.ecore#//ChangeRequest">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//ChangeRequest/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//ChangeRequest/status"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//ChangeRequest/timestamp"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smartSLA.ecore#//ChangeRequest/party"/>
+    </genClasses>
+    <genClasses ecoreClass="smartSLA.ecore#//EscalationPolicy">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//EscalationPolicy/level"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//EscalationPolicy/action"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//EscalationPolicy/responseTime"/>
+    </genClasses>
+    <genClasses ecoreClass="smartSLA.ecore#//Notification">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//Notification/triggerCondition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//Notification/message"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference smartSLA.ecore#//Notification/target"/>
+    </genClasses>
+    <genClasses ecoreClass="smartSLA.ecore#//ComplianceRequirement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//ComplianceRequirement/standard"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//ComplianceRequirement/verificationMethod"/>
+    </genClasses>
+    <genClasses ecoreClass="smartSLA.ecore#//SecurityRequirement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//SecurityRequirement/encryptionLevel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//SecurityRequirement/accessControl"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//SecurityRequirement/auditTrail"/>
+    </genClasses>
+    <genClasses ecoreClass="smartSLA.ecore#//SLAHistory">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//SLAHistory/timestamp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//SLAHistory/eventType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//SLAHistory/details"/>
+    </genClasses>
+    <genClasses ecoreClass="smartSLA.ecore#//VersionControl">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//VersionControl/versionNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//VersionControl/changeLog"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//VersionControl/timestamp"/>
+    </genClasses>
+    <genClasses ecoreClass="smartSLA.ecore#//CloudSource">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//CloudSource/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//CloudSource/identifier"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//CloudSource/provider"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="smartSLA.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute smartSLA.ecore#//NamedElement/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

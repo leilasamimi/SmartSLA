@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smartSLA:SLAContract
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:smartSLA="http://www.example.org/smartSLA"
+    xsi:schemaLocation="http://www.example.org/smartSLA smartSLA.ecore"
+    name="CloudSLA_v1.0"
+    duration="365"
+    version="1.0">
+  <parties name="Provider 1"
+      address="0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2"
+      reputationScore="100.0"
+      changerequest="//@changerequest.0"/>
+  <parties name="Consumer 1"
+      address="0x4B0897b0513fdc7C541B6d9D7E929C4e5364D2dB"
+      reputationScore="80.0"/>
+  <objectives
+      metric="Availability"
+      threshold="99.9"
+      measurementUnit="percentage"
+      evaluationMethod="Blockchain monitoring">
+    <cloudsource
+        identifier="EC2-Instance-123"
+        provider="AWS"/>
+  </objectives>
+  <penalties
+      condition="Availability &lt; 99.9"
+      action="Refund 10 tokens"
+      enforcementMechanism="Automatic deduction from provider wallet"/>
+  <notifications
+      triggerCondition="SLA violation"
+      message="SLA violation detected"
+      target="//@parties.1"/>
+  <compliancerequirements
+      standard="ISO27001"
+      verificationMethod="Annual audit"/>
+  <securityrequirements
+      encryptionLevel="AES-256"
+      accessControl="Multi-factor authentication"
+      auditTrail="true"/>
+  <auditLogs
+      eventType="Compliance"
+      details="SLA met on day 100"/>
+  <versioncontrol
+      versionNumber="1.0"
+      changeLog="Initial deployment"/>
+  <incentives
+      condition="SLA compliance for 30 consecutive days"
+      reward="5 extra tokens discount"/>
+  <terminationConditions
+      reason="Repeated SLA violations"
+      consequence="Contract termination with penalty"/>
+  <disputeresolution
+      procedure="Mediation then arbitration"
+      mediator="XYZ Arbitration Center"
+      jurisdiction="Local jurisdiction"/>
+  <changerequest
+      description="Upgrade resource capacity"
+      status="pending"
+      party="//@parties.0"/>
+  <escalationpolicy
+      level="1"
+      action="Immediate notification and remedial action"
+      responseTime="60"/>
+</smartSLA:SLAContract>

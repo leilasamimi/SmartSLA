@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smartSLA:SLAContract
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:smartSLA="http://www.example.org/smartSLA"
+    xsi:schemaLocation="http://www.example.org/smartSLA smartSLA.ecore"
+    name="CloudStorageSLA_v2.0"
+    duration="730"
+    version="2.0">
+  <parties name="Provider"
+      address="0x1234567890abcdef1234567890abcdef12345678"
+      reputationScore="90.0"
+      changerequest="//@changerequest.0"/>
+  <parties name="Consumer"
+      role="Consumer"
+      address="0xabcdef1234567890abcdef1234567890abcdef12"
+      reputationScore="85.0"/>
+  <objectives
+      metric="Data Integrity"
+      threshold="99.99"
+      measurementUnit="percentage"
+      evaluationMethod="Periodic integrity checks">
+    <cloudsource
+        type="Storage"
+        identifier="S3-Bucket-456"
+        provider="AWS"/>
+  </objectives>
+  <penalties
+      condition="Data loss detected"
+      action="Refund 20 tokens"
+      enforcementMechanism="Automatic deduction"/>
+  <notifications
+      triggerCondition="Data breach"
+      message="Data breach detected in storage service"
+      target="//@parties.1"/>
+  <compliancerequirements
+      standard="GDPR"
+      verificationMethod="Quarterly audit"/>
+  <securityrequirements
+      encryptionLevel="AES-256"
+      accessControl="Role-based access control"
+      auditTrail="true"/>
+  <auditLogs
+      eventType="Breach"
+      details="Minor data breach on day 200"/>
+  <versioncontrol
+      versionNumber="2.0"
+      changeLog="Updated storage capacity parameters"/>
+  <incentives
+      condition="No data loss for 1 year"
+      reward="10 extra tokens discount"/>
+  <terminationConditions
+      reason="Repeated data breaches"
+      consequence="Contract termination with penalty"/>
+  <disputeresolution
+      procedure="Mediation then arbitration"
+      mediator="Storage Arbitration Center"
+      jurisdiction="Local jurisdiction"/>
+  <changerequest
+      description="Increase storage capacity"
+      status="Approved"
+      party="//@parties.0"/>
+  <escalationpolicy
+      level="2"
+      action="Immediate remedial action"
+      responseTime="30"/>
+</smartSLA:SLAContract>

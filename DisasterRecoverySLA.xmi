@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smartSLA:SLAContract
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:smartSLA="http://www.example.org/smartSLA"
+    xsi:schemaLocation="http://www.example.org/smartSLA smartSLA.ecore"
+    name="DisasterRecoverySLA_v1.0"
+    duration="180"
+    version="1.0">
+  <parties name="Provider"
+      address="0xProviderAddressDR"
+      reputationScore="99.0"
+      changerequest="//@changerequest.0"/>
+  <parties name="Consumer"
+      role="Consumer"
+      address="0xConsumerAddressDR"
+      reputationScore="90.0"/>
+  <objectives
+      metric="RecoveryTime"
+      threshold="600.0"
+      measurementUnit="seconds"
+      evaluationMethod="Incident reports and periodic tests">
+    <cloudsource
+        type="DisasterRecoverySystem"
+        identifier="DR-System-001"
+        provider="Azure"/>
+  </objectives>
+  <objectives
+      metric="RecoveryPointObjective"
+      threshold="300.0"
+      measurementUnit="seconds"
+      evaluationMethod="Backup verification and recovery tests">
+    <cloudsource
+        type="DisasterRecoverySystem"
+        identifier="DR-System-001"
+        provider="Azure"/>
+  </objectives>
+  <penalties
+      condition="RecoveryTime > 600s or RecoveryPointObjective > 300s"
+      action="Refund 25 tokens"
+      enforcementMechanism="Automatic deduction from provider wallet"/>
+  <notifications
+      triggerCondition="Disaster event or DR failure"
+      message="Disaster Recovery SLA violation detected"
+      target="//@parties.1"/>
+  <compliancerequirements
+      standard="ISO22301"
+      verificationMethod="Annual and periodic DR tests"/>
+  <securityrequirements
+      encryptionLevel="AES-256"
+      accessControl="Strict access control for DR systems"
+      auditTrail="true"/>
+  <auditLogs
+      eventType="DRTest"
+      details="DR test executed successfully on day X"/>
+  <versioncontrol
+      versionNumber="1.0"
+      changeLog="Initial DR SLA deployment"/>
+  <incentives
+      condition="Both recovery objectives met during a disaster"
+      reward="Bonus 15 tokens discount"/>
+  <terminationConditions
+      reason="Failure to meet recovery objectives in repeated disasters"
+      consequence="Contract termination with penalty"/>
+  <disputeresolution
+      procedure="Mediation then arbitration"
+      mediator="Disaster Recovery Arbitration Center"
+      jurisdiction="Local jurisdiction"/>
+  <changerequest
+      description="Upgrade DR system for faster backups"
+      status="Pending"
+      party="//@parties.0"/>
+  <escalationpolicy
+      level="3"
+      action="Immediate DR measures and notification"
+      responseTime="10"/>
+</smartSLA:SLAContract>
